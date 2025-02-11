@@ -52,6 +52,16 @@ app.post('/send_message', (req, res) => {
     });
 });
 
+app.post("/send_notification_alert", (req, res) => {
+    const { message, content } = req.body;
+    io.emit("receive_notification_alert", {
+        content: content,
+    });
+    res.status(200).json({
+        status: "Notification alert sent",
+    });
+});
+
 server.listen(3000, () => {
     console.log('Socket.io server running on port 3000');
 });
